@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice Haven - Delicious Pizza</title>
+</head>
+<body>
+    <script>
+        // Styles dynamically added
+        const style = document.createElement('style');
+        style.innerHTML = `
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Arial', sans-serif;
+                background-color: #f9f9f9;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease;
+            }
+
+            .navbar-logo {
+                font-size: 28px;
+                font-weight: bold;
+                color: #ff5733;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                display: inline-block;
+                background: -webkit-linear-gradient(45deg, #ff5733, #c70039);
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+
+            ul.navbar-links {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+            }
+
+            ul.navbar-links li {
+                margin-right: 20px;
+            }
+
+            ul.navbar-links li a {
+                color: #333;
+                text-decoration: none;
+                font-size: 18px;
+                padding: 10px 15px;
+                display: inline-block;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            ul.navbar-links li a:hover {
+                background-color: #e14e1e;
+                color: #f9f9f9;
+            }
+
+            header {
+                background-color: #ff5733;
+                color: white;
+                padding: 40px 0;
+                text-align: center;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .container {
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 28px;
+                color: #ff5733;
+            }
+
+            .pizza-card {
+                background-color: white;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+                display: inline-block;
+                width: 23%;
+                margin-right: 2%;
+            }
+
+            .pizza-card:hover {
+                transform: scale(1.05);
+            }
+
+            .pizza-card img {
+                width: 100%;
+                height: auto;
+                margin: 15px 0;
+            }
+
+            .pizza-card-content {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .pizza-card-content h3 {
+                margin: 10px 0;
+                color: #333;
+            }
+
+            .pizza-card-content p {
+                color: #666;
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .pizza-card-content button {
+                background-color: #ff5733;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .pizza-card-content button:hover {
+                background-color: #ff4520;
+            }
+
+            .pizza-card-content input {
+                padding: 5px;
+                margin: 5px 0;
+                width: 50px;
+                text-align: center;
+                font-size: 16px;
+            }
+
+            footer {
+                background-color: #333;
+                color: white;
+                padding: 20px 0;
+                text-align: center;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+                box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .order-summary {
+                background-color: #f0f0f0;
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .order-summary p {
+                font-size: 18px;
+                margin: 10px 0;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Navigation Bar using JavaScript
+        const nav = document.createElement('nav');
+
+        const logo = document.createElement('div');
+        logo.className = 'navbar-logo';
+        logo.textContent = 'Slice Haven';
+
+        const ul = document.createElement('ul');
+        ul.className = 'navbar-links';
+
+        const links = ['Home', 'Menu', 'Order', 'Contact'];
+        links.forEach((linkText) => {
+            const li = document.createElement('li');
+
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = linkText;
+
+            if (linkText === 'Order') {
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('order-summary').scrollIntoView({behavior: 'smooth'});
+                });
+            }
+
+            if (linkText === 'Contact') {
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('footer').scrollIntoView({behavior: 'smooth'});
+                });
+            }
+
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+
+        nav.appendChild(logo);
+        nav.appendChild(ul);
+        document.body.appendChild(nav);
+
+        // Header Section
+        const header = document.createElement('header');
+        const h1 = document.createElement('h1');
+        h1.textContent = 'Welcome to Slice Haven';
+        const p = document.createElement('p');
+        p.textContent = 'Best pizza in town, made fresh just for you!';
+        header.appendChild(h1);
+        header.appendChild(p);
+        document.body.appendChild(header);
+
+        // Main Container
+        const container = document.createElement('div');
+        container.className = 'container';
+
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Our Menu';
+        container.appendChild(h2);
+
+        const menuContainer = document.createElement('div');
+        menuContainer.id = 'pizza-menu';
+
+        const pizzas = [
+            { name: 'Pepperoni Pizza', description: 'Classic pepperoni, mozzarella, and tomato sauce.', price: 12.99, image: 'Pepperoni_Pizza.jpeg' },
+            { name: 'Margherita Pizza', description: 'Tomato, fresh mozzarella, basil, and olive oil.', price: 10.99, image: 'margherita-pizza.jpg' },
+            { name: 'Veggie Supreme', description: 'Loaded with veggies, mozzarella, and tomato sauce.', price: 11.99, image: 'veggeie.jpg' },
+            { name: 'BBQ Chicken', description: 'Grilled chicken, BBQ sauce, red onions, and mozzarella.', price: 13.99, image: 'bbq chicken.jpg' }
+        ];
+
+        let totalCost = 0;
+        let totalTime = 0;
+        const orderedPizzas = [];
+
+        const orderSummary = document.createElement('div');
+        orderSummary.className = 'order-summary';
+        orderSummary.id = 'order-summary';
+
+        const summaryText = document.createElement('p');
+        summaryText.textContent = 'Order Summary:';
+        orderSummary.appendChild(summaryText);
+
+        const pizzaList = document.createElement('ul');
+        orderSummary.appendChild(pizzaList);
+
+        const costDisplay = document.createElement('p');
+        const timeDisplay = document.createElement('p');
+        orderSummary.appendChild(costDisplay);
+        orderSummary.appendChild(timeDisplay);
+
+        const updateOrderSummary = () => {
+            // Clear the pizza list first
+            pizzaList.innerHTML = '';
+
+            // Add ordered pizzas
+            orderedPizzas.forEach(order => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${order.quantity} x ${order.name} - $${(order.price * order.quantity).toFixed(2)}`;
+                pizzaList.appendChild(listItem);
+            });
+
+            // Update total cost and time
+            costDisplay.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
+            timeDisplay.textContent = `Estimated Time: ${totalTime} minutes`;
+        };
+
+        pizzas.forEach(pizza => {
+            const pizzaCard = document.createElement('div');
+            pizzaCard.className = 'pizza-card';
+
+            const pizzaImage = document.createElement('img');
+            pizzaImage.src = pizza.image;
+            pizzaCard.appendChild(pizzaImage);
+
+            const pizzaContent = document.createElement('div');
+            pizzaContent.className = 'pizza-card-content';
+
+            const pizzaTitle = document.createElement('h3');
+            pizzaTitle.textContent = pizza.name;
+            pizzaContent.appendChild(pizzaTitle);
+
+            const pizzaDesc = document.createElement('p');
+            pizzaDesc.textContent = pizza.description;
+            pizzaContent.appendChild(pizzaDesc);
+
+            const pizzaPrice = document.createElement('p');
+            pizzaPrice.textContent = `$${pizza.price.toFixed(2)}`;
+            pizzaContent.appendChild(pizzaPrice);
+
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.min = 1;
+            quantityInput.value = 1;
+            pizzaContent.appendChild(quantityInput);
+
+            const addToOrderButton = document.createElement('button');
+            addToOrderButton.textContent = 'Add to Order';
+            addToOrderButton.addEventListener('click', () => {
+                const quantity = parseInt(quantityInput.value);
+                if (quantity > 0) {
+                    orderedPizzas.push({ name: pizza.name, price: pizza.price, quantity });
+                    totalCost += pizza.price * quantity;
+                    totalTime += quantity * 10; // Assuming 10 minutes per pizza
+                    updateOrderSummary();
+                }
+            });
+            pizzaContent.appendChild(addToOrderButton);
+
+            pizzaCard.appendChild(pizzaContent);
+            menuContainer.appendChild(pizzaCard);
+        });
+
+        container.appendChild(menuContainer);
+        container.appendChild(orderSummary);
+        document.body.appendChild(container);
+
+        // Footer
+        const footer = document.createElement('footer');
+        const footerText = document.createElement('p');
+        footerText.textContent = 'Contact Us: support@slicehaven.com | 123-456-7890';
+        footer.appendChild(footerText);
+        document.body.appendChild(footer);
+    </script>
+</body>
+</html>
